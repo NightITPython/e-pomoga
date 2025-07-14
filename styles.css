@@ -5,7 +5,7 @@
     --light: #f8f9fa;
     --dark: #212529;
     --success: #28a745;
-    --border-radius: 16px;
+    --border-radius: 12px;
     --box-shadow: 0 12px 30px rgba(0, 87, 184, 0.15);
     --transition: all 0.3s ease;
 }
@@ -22,6 +22,21 @@ body {
     background: linear-gradient(135deg, rgba(0, 87, 184, 0.1) 0%, rgba(0, 200, 150, 0.1) 100%);
     color: var(--dark);
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="50" height="50" x="25" y="25" fill="rgba(0,87,184,0.05)" rx="10"/></svg>');
+    background-size: 100px 100px;
+    opacity: 0.3;
+    z-index: -1;
 }
 
 header {
@@ -58,6 +73,7 @@ header p {
     margin-bottom: 2rem;
     border: 1px solid rgba(0, 87, 184, 0.1);
     position: relative;
+    overflow: hidden;
 }
 
 .payment-card::before {
@@ -238,7 +254,6 @@ footer p:last-child {
 
 /* Форма введення даних */
 .data-form {
-    display: none;
     margin-top: 30px;
     padding: 40px;
     background: white;
@@ -282,6 +297,11 @@ footer p:last-child {
     box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.2);
 }
 
+textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
 .submit-btn {
     background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
     color: white;
@@ -302,7 +322,7 @@ footer p:last-child {
     box-shadow: 0 10px 25px rgba(0, 87, 184, 0.35);
 }
 
-/* Адаптивность */
+/* Адаптивність */
 @media (max-width: 768px) {
     .container {
         padding: 0 1rem;
@@ -326,4 +346,100 @@ footer p:last-child {
         width: 90px;
         height: 60px;
     }
+}
+
+/* Стилі для сторінок банків */
+.bank-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.bank-header {
+    padding: 2rem;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.bank-logo {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.bank-container {
+    flex: 1;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bank-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.bank-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.loading-spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Специфічні кольори для банків */
+.privat {
+    --primary: #4CAF50;
+    --secondary: #8BC34A;
+}
+
+.oschad {
+    --primary: #00A3E0;
+    --secondary: #64B5F6;
+}
+
+.raif {
+    --primary: #FFC107;
+    --secondary: #FFD54F;
+}
+
+.mono {
+    --primary: #6C2A84;
+    --secondary: #9C27B0;
+}
+
+.pumb {
+    --primary: #D32F2F;
+    --secondary: #F44336;
 }
