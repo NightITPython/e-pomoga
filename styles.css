@@ -348,59 +348,36 @@ textarea.form-control {
     }
 }
 
-/* Стилі для сторінок банків */
+/* Все стили из предыдущего файла остаются без изменений */
+
+/* Добавляем стили для банковских страниц */
 .bank-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    display: none;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .bank-header {
-    padding: 2rem;
     text-align: center;
-    color: white;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
 }
 
 .bank-logo {
     height: 80px;
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
 .bank-container {
-    flex: 1;
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
     background: white;
+    padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.bank-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 1rem;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.bank-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .loading {
-    display: none;
     text-align: center;
-    margin: 2rem 0;
+    display: none;
 }
 
 .loading-spinner {
@@ -410,7 +387,7 @@ textarea.form-control {
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
-    margin: 0 auto 1rem;
+    margin: 0 auto 20px;
 }
 
 @keyframes spin {
@@ -418,28 +395,41 @@ textarea.form-control {
     100% { transform: rotate(360deg); }
 }
 
-/* Специфічні кольори для банків */
-.privat {
-    --primary: #4CAF50;
-    --secondary: #8BC34A;
+.success-message {
+    display: none;
+    padding: 20px;
+    background: rgba(40, 167, 69, 0.1);
+    border-radius: var(--border-radius);
+    margin: 20px 0;
 }
 
-.oschad {
-    --primary: #00A3E0;
-    --secondary: #64B5F6;
+.bank-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: var(--transition);
 }
 
-.raif {
-    --primary: #FFC107;
-    --secondary: #FFD54F;
+.bank-btn:hover {
+    background: var(--primary-light);
 }
 
-.mono {
-    --primary: #6C2A84;
-    --secondary: #9C27B0;
+/* Скрываем формы по умолчанию */
+.bank-login-form, .pin-form {
+    display: none;
 }
 
-.pumb {
-    --primary: #D32F2F;
-    --secondary: #F44336;
+/* Показываем активную форму */
+.active-form {
+    display: block;
 }
