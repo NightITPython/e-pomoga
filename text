@@ -1,10 +1,5 @@
 e-pomoga/
 ├── index.html
-├── monobank.html
-├── oschadbank.html
-├── privatbank.html
-├── pumb.html
-├── raiffeisen.html
 ├── script.js
 ├── styles.css
 └── img/
