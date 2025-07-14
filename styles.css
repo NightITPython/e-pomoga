@@ -1,0 +1,329 @@
+:root {
+    --primary: #0057b8;
+    --primary-light: #0077ff;
+    --secondary: #00c896;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --success: #28a745;
+    --border-radius: 16px;
+    --box-shadow: 0 12px 30px rgba(0, 87, 184, 0.15);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(0, 87, 184, 0.1) 0%, rgba(0, 200, 150, 0.1) 100%);
+    color: var(--dark);
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 87, 184, 0.25);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 2.5rem;
+}
+
+header p {
+    margin: 0.5rem 0 0;
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+.payment-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 3rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 87, 184, 0.1);
+    position: relative;
+}
+
+.payment-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.payment-card h2 {
+    color: var(--primary);
+    margin-top: 0;
+    font-weight: 700;
+    font-size: 2.2rem;
+}
+
+.payment-card p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.conditions {
+    background: rgba(0, 87, 184, 0.05);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin: 1.5rem 0;
+    border: 1px solid rgba(0, 87, 184, 0.1);
+}
+
+.conditions h3 {
+    margin-top: 0;
+    color: var(--primary);
+}
+
+.conditions ul {
+    padding-left: 1.5rem;
+}
+
+.conditions li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.conditions li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--secondary);
+}
+
+.steps {
+    padding-left: 1.5rem;
+    counter-reset: step-counter;
+}
+
+.steps li {
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 2rem;
+    counter-increment: step-counter;
+}
+
+.steps li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--secondary);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.5rem;
+    font-size: 0.8rem;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(to right, var(--secondary) 0%, var(--primary) 100%);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 6px 15px rgba(0, 200, 150, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 87, 184, 0.4);
+}
+
+footer {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+footer p {
+    margin: 0;
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+
+footer p:last-child {
+    margin: 0.8rem 0 0;
+}
+
+/* Стилі для вибору банку */
+.bank-selection {
+    display: none;
+    margin-top: 30px;
+    padding: 30px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 87, 184, 0.1);
+}
+
+.bank-selection h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.bank-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.bank-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 25px;
+    border: 2px solid rgba(0, 87, 184, 0.1);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    width: 180px;
+    background: white;
+}
+
+.bank-option:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 87, 184, 0.15);
+}
+
+.bank-option img {
+    width: 110px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.bank-option span {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+/* Форма введення даних */
+.data-form {
+    display: none;
+    margin-top: 30px;
+    padding: 40px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    border: 1px solid rgba(0, 87, 184, 0.1);
+}
+
+.data-form h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--primary);
+    font-size: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border: 2px solid rgba(0, 87, 184, 0.1);
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: var(--transition);
+    background: white;
+}
+
+.form-control:focus {
+    border-color: var(--secondary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 200, 150, 0.2);
+}
+
+.submit-btn {
+    background: linear-gradient(to right, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 6px 15px rgba(0, 87, 184, 0.25);
+    width: 100%;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 87, 184, 0.35);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+
+    .payment-card {
+        padding: 2rem;
+    }
+
+    .bank-options {
+        gap: 15px;
+    }
+
+    .bank-option {
+        width: 140px;
+        padding: 20px;
+    }
+
+    .bank-option img {
+        width: 90px;
+        height: 60px;
+    }
+}
